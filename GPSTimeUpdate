@@ -1,0 +1,7 @@
+#!/bin/bash
+#extracts time from GPS
+GPSLINE=`gpspipe -w | head -10 | grep TPV | head -1`
+#pull date and time from valid TPV line
+GPSDATE=`echo $GPSLINE | sed -r 's/.*"time":"([^"]*).*/\1/'`
+#set system time to GPS time
+date -s "$GPSDATE"
